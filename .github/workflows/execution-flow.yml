@@ -34,7 +34,7 @@ jobs:
         run: npm ci
       - name: Test code
         id: run-tests
-        run: npm run test_
+        run: npm run test
       - name: Upload test report
         if: failure() && steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v4
@@ -77,6 +77,7 @@ jobs:
         run: echo "Deploying..."
   report:
     if: failure()
+    needs: [lint,deploy]
     runs-on: ubuntu-latest
     steps:
       - name: output information
