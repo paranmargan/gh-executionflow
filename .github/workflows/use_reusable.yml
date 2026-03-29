@@ -8,3 +8,12 @@ jobs:
     uses: ./.github/workflows/reusable.yml
     with:
       artifact-name : "new-dist"
+    # secrets:
+    #   some-secret: ${{ secrets.some-secret }}
+
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: print deploy output
+        run: echo "${{ needs.deploy.outputs.result }}"
